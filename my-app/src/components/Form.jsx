@@ -1,20 +1,4 @@
 import React, { useState } from "react";
-const initState = {
-  accounts: [
-    {
-      id: 1,
-      customerName: "Israa Othman",
-      accountNumber: "123456",
-      accountType: "Savings",
-    },
-    {
-      id: 2,
-      customerName: "Ahmad Zahran",
-      accountNumber: "987654",
-      accountType: "Student accounts",
-    },
-  ],
-};
 
 const Form = () => {
   const [accounts, setAccounts] = useState([]);
@@ -33,6 +17,12 @@ const Form = () => {
     event.target.reset();
   };
 
+  const handleDelete = (id)=>{
+    const deleteAccount = accounts.filter((account) => account.id !== id)
+    setAccounts(deleteAccount);
+
+
+  }
   return (
     <>
       <div className="container w-50 mt-5">
@@ -92,12 +82,13 @@ const Form = () => {
       </div>
       <div className="container">
         {accounts.map((account) => (
-          <div className="card p-3" key={account.id}>
+          <div className="card w-25 p-3 d-inline-block m-2" key={account.id}>
             <h2>{account.customerName}</h2>
             <p>id: {account.id}</p>
             <p>Customer Name: {account.customerName}</p>
             <p>Account Number: {account.accountNumber}</p>
             <p>Account Type: {account.accountType}</p>
+            <button className="btn btn-info w-25 " onClick={()=>handleDelete(account.id)}>delete</button>
           </div>
         ))}
       </div>
